@@ -16,7 +16,22 @@ export interface FormInput {
   id: string
   name?: string
   unit?: string
+  defaultValue?: number
   group?: FormInput[]
+  table?: GasTableRow[]
+}
+
+export interface GasTableRow {
+  name: string
+  formula: string
+  defaultPercent: number
+  molarMass: number
+  specificHeat: number | TempTableRow[]
+}
+
+export interface TempTableRow {
+  temp: number
+  formula: (temp: number) => number
 }
 
 export type AtmoOption = 'star' | 'gas' | 'earth' | 'other' | 'locked'

@@ -15,7 +15,10 @@
       </BFormRadioGroup>
       <div class="row row-cols-1 row-cols-lg-2 g-4">
         <div class="col">
-          <BCard><CForm :form-definition="optionSelected.config" /></BCard>
+          <BCard>
+            <!-- TODO: current temp needs to be a real number -->
+            <CForm :form-definition="optionSelected.config" currentTemp="194.445484211496" />
+          </BCard>
         </div>
         <div class="col">
           <BCard>{{ buttonSelected }}{{ optionSelected }}</BCard>
@@ -70,9 +73,9 @@ const buttonsOptions: AtmoOptionConfig[] = [
     config: lockedDefinition
   }
 ]
-const buttonSelected: Ref<AtmoOption> = ref('star')
+const buttonSelected: Ref<AtmoOption> = ref('gas')
 const optionSelected: ComputedRef<AtmoOptionConfig> = computed(
-  () => buttonsOptions.find((option) => option.value === buttonSelected.value) || buttonsOptions[0]
+  () => buttonsOptions.find((option) => option.value === buttonSelected.value) ?? buttonsOptions[0]
 )
 </script>
 

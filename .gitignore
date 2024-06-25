@@ -28,5 +28,9 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# individual files
 KSPatmoCalculator_2.0.6.xlsx
 index-vanilla.html
+~$KSPatmoCalculator_2.0.6.xlsx
+KSPatmoCalculator_2.0.6.xlsx:Zone.Identifier
