@@ -16,12 +16,16 @@
       <div class="row row-cols-1 row-cols-lg-2 g-4">
         <div class="col">
           <BCard>
-            <!-- TODO: current temp needs to be a real number -->
-            <CForm :form-definition="optionSelected.config" currentTemp="194.445484211496" />
+            <CForm
+              :form-definition="optionSelected.config"
+              @formDataChanged="(data: formDataType) => (formData = data)"
+            />
           </BCard>
         </div>
         <div class="col">
-          <BCard>{{ buttonSelected }}{{ optionSelected }}</BCard>
+          <BCard>
+            {{ formData }}
+          </BCard>
         </div>
       </div>
     </div>
@@ -35,7 +39,7 @@ import { gasDefinition } from '@/configs/gas'
 import { lockedDefinition } from '@/configs/locked'
 import { otherDefinition } from '@/configs/other'
 import { starDefinition } from '@/configs/star'
-import type { AtmoOption, AtmoOptionConfig } from '@/types/form'
+import type { AtmoOption, AtmoOptionConfig, formDataType } from '@/types/form'
 import { computed, ref, type Ref, type ComputedRef } from 'vue'
 
 const buttonsOptions: AtmoOptionConfig[] = [
@@ -77,6 +81,7 @@ const buttonSelected: Ref<AtmoOption> = ref('gas')
 const optionSelected: ComputedRef<AtmoOptionConfig> = computed(
   () => buttonsOptions.find((option) => option.value === buttonSelected.value) ?? buttonsOptions[0]
 )
+const formData: Ref<formDataType> = ref({})
 </script>
 
 <style lang="scss" scoped></style>

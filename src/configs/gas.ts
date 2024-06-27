@@ -63,9 +63,10 @@ export const gasDefinition: FormDefinition = {
           id: 'gasTable',
           table: [
             {
+              id: 'gasHydrogen',
               name: 'Hydrogen',
               formula: 'H₂',
-              defaultPercent: 90.75,
+              defaultValue: 90.75,
               molarMass: 2.02,
               specificHeat: [
                 {
@@ -111,16 +112,18 @@ export const gasDefinition: FormDefinition = {
               ]
             },
             {
+              id: 'gasHelium',
               name: 'Helium',
               formula: 'He',
-              defaultPercent: 9.25,
+              defaultValue: 9.25,
               molarMass: 4.002602,
               specificHeat: 20.786
             },
             {
+              id: 'gasMethane',
               name: 'Methane',
               formula: 'CH₄',
-              defaultPercent: 0,
+              defaultValue: 0,
               molarMass: 16.0425,
               specificHeat: [
                 {
@@ -160,9 +163,10 @@ export const gasDefinition: FormDefinition = {
               ]
             },
             {
+              id: 'gasAmmonia',
               name: 'Ammonia',
               formula: 'NH₃',
-              defaultPercent: 0,
+              defaultValue: 0,
               molarMass: 17.03,
               specificHeat: [
                 {
@@ -198,9 +202,10 @@ export const gasDefinition: FormDefinition = {
               ]
             },
             {
+              id: 'gasHydrogenDeuteride',
               name: 'Hydrogen Deuteride',
               formula: 'HD',
-              defaultPercent: 0,
+              defaultValue: 0,
               molarMass: 3.02204,
               specificHeat: [
                 {

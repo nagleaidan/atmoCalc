@@ -22,9 +22,10 @@ export interface FormInput {
 }
 
 export interface GasTableRow {
+  id: `gas${string}`
   name: string
   formula: string
-  defaultPercent: number
+  defaultValue: number
   molarMass: number
   specificHeat: number | TempTableRow[]
 }
@@ -42,3 +43,5 @@ export interface AtmoOptionConfig {
   tooltip: string
   config: FormDefinition
 }
+
+export type formDataType = { [key: string]: number | undefined }

@@ -15,11 +15,15 @@
           all
         </p>
         <div v-for="subInput in input.group" :key="subInput.id" class="mt-2">
-          <CInputGroup :name="subInput.name" :unit="subInput.unit" />
+          <CInputGroup
+            :name="subInput.name"
+            :unit="subInput.unit"
+            @change="$emit('formDataChanged', formData)"
+          />
         </div>
       </div>
       <div v-else-if="input.table">
-        <BTableSimple hover small responsive>
+        <BTableSimple small responsive>
           <BThead head-variant="dark">
             <BTr>
               <BTh class="text-center">Gas Species</BTh>
@@ -33,10 +37,11 @@
             <BTr v-for="row in input.table" :key="row.name">
               <BTd>{{ row.name }}</BTd>
               <BTd>{{ row.formula }}</BTd>
-              <!-- <BTd>{{ row.defaultPercent }}</BTd> -->
-              <BTd
-                ><BInputGroup append="%"><BFormInput type="number" /></BInputGroup
-              ></BTd>
+              <BTd>
+                <BInputGroup append="%">
+                  <BFormInput type="number" @change="$emit('formDataChanged', formData)" />
+                </BInputGroup>
+              </BTd>
               <BTd>{{ row.molarMass.toFixed(2) }}</BTd>
               <BTd>
                 <div v-if="Number.isFinite(row.specificHeat)">
@@ -62,18 +67,39 @@
           </BTfoot>
         </BTableSimple>
       </div>
-      <CInputGroup :name="input.name" :unit="input.unit" v-else />
+      <CInputGroup
+        :name="input.name"
+        :unit="input.unit"
+        v-else
+        v-model="formData[input.id]"
+        @change="$emit('formDataChanged', formData)"
+      />
     </div>
   </div>
+  {{ formData }}
+  <button @click="console.log(formData)">test</button>
 </template>
 
 <script setup lang="ts">
 // the type `TempTableRow` is used, but in the html section so eslint gets confused
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { FormDefinition, TempTableRow } from '@/types/form'
+import type { FormDefinition, TempTableRow, formDataType } from '@/types/form'
+import { computed } from 'vue'
 
+const props = defineProps<{ formDefinition: FormDefinition }>()
+const emit = defineEmits<{ formDataChanged: [value: formDataType] }>()
 // TODO: current temp needs to be a real number
-defineProps<{ formDefinition: FormDefinition; currentTemp: number }>()
+const currentTemp = 194.445484211496
+const formData = computed(() =>
+  Object.fromEntries(
+    props.formDefinition.form
+      .flatMap((i) => i.inputs)
+      .flatMap((i) => i.group ?? i.table ?? i)
+      .map((i) => [i.id, i.defaultValue])
+  )
+)
+// force an emit after form data is built to initialize parent component
+emit('formDataChanged', formData.value)
 </script>
 
 <style lang="scss" scoped></style>
