@@ -18,6 +18,7 @@
           <CInputGroup
             :name="subInput.name"
             :unit="subInput.unit"
+            v-model="formData[subInput.id]"
             @change="$emit('formDataChanged', formData)"
           />
         </div>
@@ -39,7 +40,11 @@
               <BTd>{{ row.formula }}</BTd>
               <BTd>
                 <BInputGroup append="%">
-                  <BFormInput type="number" @change="$emit('formDataChanged', formData)" />
+                  <BFormInput
+                    type="number"
+                    v-model="formData[row.id]"
+                    @change="$emit('formDataChanged', formData)"
+                  />
                 </BInputGroup>
               </BTd>
               <BTd>{{ row.molarMass.toFixed(2) }}</BTd>
@@ -76,8 +81,6 @@
       />
     </div>
   </div>
-  {{ formData }}
-  <button @click="console.log(formData)">test</button>
 </template>
 
 <script setup lang="ts">

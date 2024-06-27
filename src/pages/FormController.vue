@@ -24,7 +24,9 @@
         </div>
         <div class="col">
           <BCard>
-            {{ formData }}
+            <div v-for="(entry, index) in Object.entries(formData)" :key="index">
+              {{ entry[0] }}: <code>{{ entry[1] }}</code>
+            </div>
           </BCard>
         </div>
       </div>
