@@ -3,7 +3,7 @@
     <template #prepend v-if="name">
       <BInputGroupText>{{ name }}</BInputGroupText>
     </template>
-    <BFormInput type="number" v-model="model" @change="$emit('change')" />
+    <BFormInput type="number" v-model="model" @change="$emit('change')" class="text-end" />
     <template #append v-if="unit">
       <BInputGroupText>{{ unit }}</BInputGroupText>
     </template>
@@ -16,4 +16,8 @@ defineEmits(['change'])
 const model = defineModel()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+input {
+  padding-inline-end: 0;
+}
+</style>
